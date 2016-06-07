@@ -18,6 +18,7 @@ function tweet() {
             if(doc) {
                 bot.tweet(doc.tweet);
                 store.flag(doc.gid);
+                log(doc.tweet);
             } else {
                 log("didn't tweet");
             }
