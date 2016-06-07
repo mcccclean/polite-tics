@@ -11,16 +11,20 @@ var Twitterbot = require('mcccclean-twitterbot');
 var bot = new Twitterbot(config.get('twitterbot'));
 
 function tweet() {
-    store.getTopTweet().then(function(doc) {
-        if(doc) {
-            bot.tweet(doc.tweet);
-            store.flag(doc.gid);
-        } else {
-            log("didn't tweet");
-        }
-    }).catch(function(err) {
-        log('error', err);
-    });
+    var h = moment().hour();
+    // keep to tweeting between 8am and 6pm
+    if(h >= 8 && h <= 17) {
+        store.getTopTweet().then(function(doc) {
+            if(doc) {
+                bot.tweet(doc.tweet);
+                store.flag(doc.gid);
+            } else {
+                log("didn't tweet");
+            }
+        }).catch(function(err) {
+            log('error', err);
+        });
+    }
 }
 
 function downloadNewExcuses() {
@@ -36,4 +40,4 @@ function downloadNewExcuses() {
 downloadNewExcuses();
 tweet();
 setInterval(downloadNewExcuses, HOUR * 24);
-setInterval(tweet, HOUR * 4);
+setInterval(tweet, HOUR * 2);
