@@ -17,8 +17,8 @@ function tweet() {
         store.getTopTweet().then(function(doc) {
             if(doc) {
                 bot.tweet(doc.tweet);
-                store.flag(doc.gid);
-                log(doc.tweet);
+                store.flag(doc._id);
+                log("Tweeting:", doc.tweet);
             } else {
                 log("didn't tweet");
             }
