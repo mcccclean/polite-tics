@@ -1,9 +1,10 @@
 {
-  "name": "excuseme",
+  "name": "politetics",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "forever start -a --uid politetics index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
